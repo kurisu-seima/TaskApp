@@ -21,6 +21,7 @@ class TaskViewController: UIViewController {
         
         taskTableView.dataSource = self
         taskTableView.delegate = self
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,11 +41,8 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      let cell = taskTableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell", for: indexPath) as! TaskTableViewCell
-      cell.taskTitleLabel.text = tasks[indexPath.row]["title"]
-      cell.taskSubTitleLabel.text = tasks[indexPath.row]["date"]
-      cell.task = tasks[indexPath.row]
-      cell.indexPath = indexPath.row
-      return cell
+        let cell = taskTableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell", for: indexPath) as! TaskTableViewCell
+        cell.setUp(task: tasks[indexPath.row], index: indexPath.row)
+        return cell
     }
 }

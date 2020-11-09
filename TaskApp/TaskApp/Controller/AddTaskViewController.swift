@@ -50,7 +50,7 @@ class AddTaskViewController: UIViewController {
             return
         }
         
-        let task: [String: Any] = ["title": title, "date:": date, "isFavorite": false]
+        let task: [String: Any] = ["title": title, "date": date, "isFavorite": false]
         var tasks = UserDefaults.standard.array(forKey: "tasks") as? [[String: Any]] ?? []
         tasks.append(task)
         UserDefaults.standard.set(tasks, forKey: "tasks")

@@ -123,7 +123,7 @@
                                                     </constraints>
                                                     <state key="normal" backgroundImage="pencil" catalog="system"/>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ax-xD-bOh">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ax-xD-bOh">
                                                     <rect key="frame" x="354" y="9" width="40" height="37.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="Pul-yH-3E8"/>
@@ -148,6 +148,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="favoriteButton" destination="1ax-xD-bOh" id="14j-ag-8XK"/>
                                             <outlet property="taskSubTitleLabel" destination="fAd-EE-QCG" id="QKz-gx-PXg"/>
                                             <outlet property="taskTitleLabel" destination="rEd-mY-jIX" id="iKE-q6-Gch"/>
                                         </connections>
