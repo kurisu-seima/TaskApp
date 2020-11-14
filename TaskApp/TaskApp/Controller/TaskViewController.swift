@@ -21,7 +21,6 @@ class TaskViewController: UIViewController {
         
         taskTableView.dataSource = self
         taskTableView.delegate = self
-
     }
     
     override func viewWillAppear(_ animated: Bool) {

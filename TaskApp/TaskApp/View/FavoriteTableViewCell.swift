@@ -14,8 +14,6 @@ class FavoriteTableViewCell: UITableViewCell {
     
     @IBOutlet weak var favoriteSubtitleLabel: UILabel!
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,5 +24,9 @@ class FavoriteTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func favoriteSetUp(favoriteTask: [String: Any]) {
+        favoriteTitleLabel.text = favoriteTask["title"] as? String
+        favoriteSubtitleLabel.text = favoriteTask["date"] as? String
+    }
 }

@@ -12,8 +12,15 @@ class FavoriteViewController: UIViewController {
 
     @IBOutlet weak var favoriteTableView: UITableView!
     
-    var favoriteTasks:[[String: String]] {
-        UserDefaults.standard.array(forKey: "tasks") as? [[String: String]] ?? []
+    var favoriteTasks:[[String: Any]] {
+        var trueTasks: [[String: Any]] = [[:]]
+        let tasks = UserDefaults.standard.array(forKey: "tasks") as? [[String: Any]] ?? []
+        for task in tasks {
+            if task["isFavorite"] as? Bool ?? false {
+                trueTasks.append(task)
+            }
+        }
+        return trueTasks
     }
     
     override func viewDidLoad() {
@@ -29,15 +36,13 @@ class FavoriteViewController: UIViewController {
 
 //テーブルビュー
 extension FavoriteViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         favoriteTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = favoriteTableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath) as! FavoriteTableViewCell
-        cell.favoriteTitleLabel.text = favoriteTasks[indexPath.row]["title"]
-        cell.favoriteSubtitleLabel.text = favoriteTasks[indexPath.row]["date"]
+        let cell = favoriteTableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell", for: indexPath) as! FavoriteTableViewCell
+        cell.favoriteSetUp(favoriteTask: favoriteTasks[indexPath.row])
         return cell
     }
 }
