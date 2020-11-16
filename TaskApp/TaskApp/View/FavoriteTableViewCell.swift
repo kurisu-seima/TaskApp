@@ -25,8 +25,8 @@ class FavoriteTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func favoriteSetUp(favoriteTask: [String: Any]) {
-        favoriteTitleLabel.text = favoriteTask["title"] as? String
-        favoriteSubtitleLabel.text = favoriteTask["date"] as? String
+    func favoriteSetUp(favoriteTask: Task) {
+        favoriteTitleLabel.text = favoriteTask.title
+        favoriteSubtitleLabel.text = favoriteTask.date
     }
 }

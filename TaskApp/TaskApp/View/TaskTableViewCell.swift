@@ -29,24 +29,13 @@ class TaskTableViewCell: UITableViewCell {
             return
         }
         
-       let truetask = !(task.isFavorite)
+        task.isFavorite = !(task.isFavorite)
         Task.saveTasks[indexPath] = task
-        if truetask.isFavorite {
+        if task.isFavorite {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
         }
-        
-//        task["isFavorite"] = !((task["isFavorite"] as? Bool) ?? false)
-//        var tasks = UserDefaults.standard.array(forKey: "tasks") as? [[String: Any]] ?? []
-//        tasks[indexPath] = task
-//        UserDefaults.standard.set(tasks, forKey: "tasks")
-//        if task["isFavorite"] as? Bool ?? false {
-//            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-//        } else {
-//            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-//        }
-        
     }
     
     func setUp(savetask: Task, index: Int) {

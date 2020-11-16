@@ -12,15 +12,14 @@ class FavoriteViewController: UIViewController {
 
     @IBOutlet weak var favoriteTableView: UITableView!
     
-    var favoriteTasks:[[String: Any]] {
-        var trueTasks: [[String: Any]] = [[:]]
-        let tasks = UserDefaults.standard.array(forKey: "tasks") as? [[String: Any]] ?? []
-        for task in tasks {
-            if task["isFavorite"] as? Bool ?? false {
-                trueTasks.append(task)
+    var favoriteTasks: [Task] {
+        var trueTask: [Task] = []
+        for task in Task.saveTasks {
+            if task.isFavorite {
+                trueTask.append(task)
             }
         }
-        return trueTasks
+        return trueTask
     }
     
     override func viewDidLoad() {
@@ -42,7 +41,7 @@ extension FavoriteViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = favoriteTableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell", for: indexPath) as! FavoriteTableViewCell
-//        cell.favoriteSetUp(favoriteTask: favoriteTasks[indexPath.row])
+        cell.favoriteSetUp(favoriteTask: favoriteTasks[indexPath.row])
         return cell
     }
 }
