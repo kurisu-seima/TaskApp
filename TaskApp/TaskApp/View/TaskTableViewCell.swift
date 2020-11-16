@@ -14,7 +14,7 @@ class TaskTableViewCell: UITableViewCell {
     
     @IBOutlet weak var taskSubTitleLabel: UILabel!
     
-    var task: [String: Any] = [:]
+    var task: Task?
     
     var indexPath: Int = 0
     
@@ -25,29 +25,34 @@ class TaskTableViewCell: UITableViewCell {
     }
     
     @IBAction func favoriteButton(_ sender: UIButton) {
-        task["isFavorite"] = !((task["isFavorite"] as? Bool) ?? false)
-        var tasks = UserDefaults.standard.array(forKey: "tasks") as? [[String: Any]] ?? []
-        tasks[indexPath] = task
-        UserDefaults.standard.set(tasks, forKey: "tasks")
-        if task["isFavorite"] as? Bool ?? false {
+        guard let task = task else {
+            return
+        }
+        
+       let truetask = !(task.isFavorite)
+        Task.saveTasks[indexPath] = task
+        if truetask.isFavorite {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
         }
+        
+//        task["isFavorite"] = !((task["isFavorite"] as? Bool) ?? false)
+//        var tasks = UserDefaults.standard.array(forKey: "tasks") as? [[String: Any]] ?? []
+//        tasks[indexPath] = task
+//        UserDefaults.standard.set(tasks, forKey: "tasks")
+//        if task["isFavorite"] as? Bool ?? false {
+//            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+//        } else {
+//            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+//        }
+        
     }
     
-    func setUp(task: [String: Any], index: Int) {
-        taskTitleLabel.text = task["title"] as? String
-        taskSubTitleLabel.text = task["date"] as? String
-        self.task = task
+    func setUp(savetask: Task, index: Int) {
+        taskTitleLabel.text = savetask.title
+        taskSubTitleLabel.text = savetask.date
+        self.task = savetask
         self.indexPath = index
-        
-        if (task["isFavorite"] as? Bool) ?? false {
-            //ボタンの画像を変える
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-        } else {
-            //ボタンの画像を変える
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-        }
     }
 }

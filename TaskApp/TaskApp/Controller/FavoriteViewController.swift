@@ -42,7 +42,7 @@ extension FavoriteViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = favoriteTableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell", for: indexPath) as! FavoriteTableViewCell
-        cell.favoriteSetUp(favoriteTask: favoriteTasks[indexPath.row])
+//        cell.favoriteSetUp(favoriteTask: favoriteTasks[indexPath.row])
         return cell
     }
 }

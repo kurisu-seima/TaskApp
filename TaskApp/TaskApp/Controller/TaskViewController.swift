@@ -9,14 +9,10 @@
 import UIKit
 
 class TaskViewController: UIViewController {
-
+    
     @IBOutlet weak var taskTableView: UITableView!
-    
-    var tasks:[[String: Any]] {
-        UserDefaults.standard.array(forKey: "tasks") as? [[String: Any]] ?? []
-    }
-    
-    override func viewDidLoad() {
+
+        override func viewDidLoad() {
         super.viewDidLoad()
         
         taskTableView.dataSource = self
@@ -36,12 +32,12 @@ class TaskViewController: UIViewController {
 //テーブルビュー
 extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tasks.count
+        Task.saveTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = taskTableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell", for: indexPath) as! TaskTableViewCell
-        cell.setUp(task: tasks[indexPath.row], index: indexPath.row)
+        cell.setUp(savetask: Task.saveTasks[indexPath.row], index: indexPath.row)
         return cell
     }
 }

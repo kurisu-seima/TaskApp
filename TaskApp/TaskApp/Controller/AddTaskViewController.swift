@@ -50,10 +50,8 @@ class AddTaskViewController: UIViewController {
             return
         }
         
-        let task: [String: Any] = ["title": title, "date": date, "isFavorite": false]
-        var tasks = UserDefaults.standard.array(forKey: "tasks") as? [[String: Any]] ?? []
-        tasks.append(task)
-        UserDefaults.standard.set(tasks, forKey: "tasks")
+        let task = Task(title: title, date: date, isFavorite: false)
+        Task.saveTasks.append(task)
         self.navigationController?.popViewController(animated: true)
     }
 }
