@@ -51,7 +51,11 @@ class AddTaskViewController: UIViewController {
         }
         
         let task = Task(title: title, date: date, isFavorite: false)
-        Task.saveTasks.append(task)
+        if let taskData = try? JSONEncoder().encode(task) {
+            UserDefaults.standard.set(taskData, forKey: "tasks") 
+        } else {
+            print("エラー")
+        }
         self.navigationController?.popViewController(animated: true)
     }
 }

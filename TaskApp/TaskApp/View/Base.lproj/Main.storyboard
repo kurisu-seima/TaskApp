@@ -93,8 +93,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEd-mY-jIX">
-                                                    <rect key="frame" x="20" y="5" width="52" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEd-mY-jIX">
+                                                    <rect key="frame" x="20" y="5" width="314" height="24"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -127,6 +127,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="1ax-xD-bOh" firstAttribute="trailing" secondItem="x15-lP-t6z" secondAttribute="trailingMargin" constant="10" id="3Rs-eM-ZgX"/>
+                                                <constraint firstItem="yiG-QQ-gXC" firstAttribute="leading" secondItem="rEd-mY-jIX" secondAttribute="trailing" constant="10" id="Cst-lS-6nG"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fAd-EE-QCG" secondAttribute="bottom" constant="2" id="Cv8-Iq-YCj"/>
                                                 <constraint firstItem="yiG-QQ-gXC" firstAttribute="centerY" secondItem="x15-lP-t6z" secondAttribute="centerY" id="FkN-Vc-ya6"/>
                                                 <constraint firstItem="1ax-xD-bOh" firstAttribute="centerY" secondItem="x15-lP-t6z" secondAttribute="centerY" id="LiE-E4-xbD"/>

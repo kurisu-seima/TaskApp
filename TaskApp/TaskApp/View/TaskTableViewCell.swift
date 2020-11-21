@@ -30,7 +30,9 @@ class TaskTableViewCell: UITableViewCell {
         }
         
         task.isFavorite = !(task.isFavorite)
-        Task.saveTasks[indexPath] = task
+//        if var tasks = UserDefaults.standard.data(forKey: "tasks") {
+//            tasks[indexPath] = task
+//        }
         if task.isFavorite {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {
@@ -38,10 +40,10 @@ class TaskTableViewCell: UITableViewCell {
         }
     }
     
-    func setUp(savetask: Task, index: Int) {
-        taskTitleLabel.text = savetask.title
-        taskSubTitleLabel.text = savetask.date
-        self.task = savetask
+    func setUp(task: Task, index: Int) {
+        taskTitleLabel.text = task.title
+        taskSubTitleLabel.text = task.date
+        self.task = task
         self.indexPath = index
     }
 }
