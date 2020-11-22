@@ -21,9 +21,6 @@ class TaskViewController: UIViewController {
         
         taskTableView.dataSource = self
         taskTableView.delegate = self
-        
-//        let domain = Bundle.main.bundleIdentifier
-//        UserDefaults.standard.removePersistentDomain(forName: domain!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
