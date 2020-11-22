@@ -13,15 +13,7 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var taskTableView: UITableView!
     
     var tasks: [Task] {
-        var tasksDataArray: [Data] = []
-        guard  let tasksData = UserDefaults.standard.data(forKey: "tasks") else {
-            return [Task]()
-        }
-        tasksDataArray.append(tasksData)
-        guard let tasksArray = try? JSONDecoder().decode([Task].self, from: tasksData) else {
-            fatalError("エラー")
-        }
-        return tasksArray
+        getData()
     }
     
     override func viewDidLoad() {
@@ -29,6 +21,9 @@ class TaskViewController: UIViewController {
         
         taskTableView.dataSource = self
         taskTableView.delegate = self
+        
+//        let domain = Bundle.main.bundleIdentifier
+//        UserDefaults.standard.removePersistentDomain(forName: domain!)
     }
     
     override func viewWillAppear(_ animated: Bool) {

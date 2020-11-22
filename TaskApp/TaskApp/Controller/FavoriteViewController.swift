@@ -12,20 +12,15 @@ class FavoriteViewController: UIViewController {
 
     @IBOutlet weak var favoriteTableView: UITableView!
     
-//    var favoriteTasks: [Task] {
-//        var trueTasks: [Task] = []
-//        for task in Task.saveTasks {
-//            if task.isFavorite {
-//                trueTasks.append(task)
-//            }
-//        }
-//        return trueTasks
-//    }
+    var favoriteTasks: [Task] {
+        let tasks = getData()
+       return getTrueTask(tasks: tasks)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        favoriteTableView.dataSource = self
+        favoriteTableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,14 +29,14 @@ class FavoriteViewController: UIViewController {
 }
 
 //テーブルビュー
-//extension FavoriteViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        favoriteTasks.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = favoriteTableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell", for: indexPath) as! FavoriteTableViewCell
-//        cell.favoriteSetUp(favoriteTask: favoriteTasks[indexPath.row])
-//        return cell
-//    }
-//}
+extension FavoriteViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        favoriteTasks.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = favoriteTableView.dequeueReusableCell(withIdentifier: "FavoriteTableViewCell", for: indexPath) as! FavoriteTableViewCell
+        cell.favoriteSetUp(favoriteTask: favoriteTasks[indexPath.row])
+        return cell
+    }
+}

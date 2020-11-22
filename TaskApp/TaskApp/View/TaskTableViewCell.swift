@@ -30,9 +30,9 @@ class TaskTableViewCell: UITableViewCell {
         }
         
         task.isFavorite = !(task.isFavorite)
-//        if var tasks = UserDefaults.standard.data(forKey: "tasks") {
-//            tasks[indexPath] = task
-//        }
+        var tasks = getData()
+        tasks[indexPath] = task
+        saveData(tasks: tasks)
         if task.isFavorite {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {
