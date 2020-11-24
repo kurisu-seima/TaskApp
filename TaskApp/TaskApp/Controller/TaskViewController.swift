@@ -19,12 +19,19 @@ class TaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem = editButtonItem
+        
         taskTableView.dataSource = self
         taskTableView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         taskTableView.reloadData()
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        taskTableView.isEditing = editing
     }
     
     @IBAction func plusButtonDidTapped(_ sender: Any) {
