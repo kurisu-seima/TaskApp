@@ -45,5 +45,11 @@ class TaskTableViewCell: UITableViewCell {
         taskSubTitleLabel.text = task.date
         self.task = task
         self.indexPath = index
+        
+        if task.isFavorite {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+        }
     }
 }

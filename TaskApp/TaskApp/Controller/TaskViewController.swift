@@ -51,4 +51,16 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
         cell.setUp(task: tasks[indexPath.row], index: indexPath.row)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        var tasks = getData()
+        tasks.remove(at: indexPath.row)
+        saveData(tasks: tasks)
+        taskTableView.deleteRows(at: [indexPath], with: .automatic)
+        taskTableView.reloadData()
+    }
 }
