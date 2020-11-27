@@ -63,4 +63,16 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
         taskTableView.deleteRows(at: [indexPath], with: .automatic)
         taskTableView.reloadData()
     }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        var tasks = getData()
+        let task = tasks[sourceIndexPath.row]
+        tasks.remove(at: sourceIndexPath.row)
+        tasks.insert(task, at: destinationIndexPath.row)
+        saveData(tasks: tasks)
+    }
 }
