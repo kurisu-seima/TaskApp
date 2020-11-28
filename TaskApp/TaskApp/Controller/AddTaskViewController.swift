@@ -16,6 +16,10 @@ class AddTaskViewController: UIViewController {
 
     let datepicker = UIDatePicker()
     
+    var task: String?
+    var date: String?
+    var indexPath: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +37,9 @@ class AddTaskViewController: UIViewController {
         //テキストフィールドの設定
         dateTextField.inputView = datepicker
         dateTextField.inputAccessoryView = toolbar
+        
+        taskTextField.text = task
+        dateTextField.text = date
     }
     
     //ツールバーの完了ボタンを押した時の処理
@@ -46,14 +53,27 @@ class AddTaskViewController: UIViewController {
     
     //タスクを追加して前の画面へ戻る
     @IBAction func addButtonDidTapped(_ sender: Any) {
-        guard  let title = taskTextField.text, let date = dateTextField.text, !title.isEmpty, !date.isEmpty else {
-            return
+        if let task = task, let date = date, let index = indexPath, !task.isEmpty, !date.isEmpty {
+            guard  let title = taskTextField.text, let date = dateTextField.text, !title.isEmpty, !date.isEmpty else {
+                return
+            }
+            
+            var tasks = getData()
+            let task = tasks[index]
+            task.title = title
+            task.date = date
+            tasks[index] = task
+            saveData(tasks: tasks)
+        } else {
+            guard  let title = taskTextField.text, let date = dateTextField.text, !title.isEmpty, !date.isEmpty else {
+                return
+            }
+            
+            let task = Task.init(title: title, date: date, isFavorite: false)
+            var tasks = getData()
+            tasks.append(task)
+            saveData(tasks: tasks)
         }
-        
-        let task = Task.init(title: title, date: date, isFavorite: false)
-        var tasks = getData()
-        tasks.append(task)
-        saveData(tasks: tasks)
         self.navigationController?.popViewController(animated: true)
     }
 }

@@ -75,4 +75,16 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
         tasks.insert(task, at: destinationIndexPath.row)
         saveData(tasks: tasks)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        taskTableView.deselectRow(at: indexPath, animated: true)
+        
+        let nextVC = self.storyboard?.instantiateViewController(identifier: "AddTask") as! AddTaskViewController
+        let tasks = getData()
+        nextVC.task = tasks[indexPath.row].title
+        nextVC.date = tasks[indexPath.row].date
+        nextVC.indexPath = indexPath.row
+
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
 }
