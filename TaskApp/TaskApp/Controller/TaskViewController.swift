@@ -49,6 +49,7 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = taskTableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell", for: indexPath) as! TaskTableViewCell
         cell.setUp(task: tasks[indexPath.row], index: indexPath.row)
+        cell.delegate = self
         return cell
     }
     
@@ -86,5 +87,20 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
         nextVC.indexPath = indexPath.row
 
         self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+}
+
+extension TaskViewController: DisplayAlert {
+    func displayAlert(taskTitle: String, index: Int) {
+        let alert = UIAlertController(title: "ToDo名を編集", message: nil, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let cancelButton = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(okButton)
+        alert.addAction(cancelButton)
+        alert.addTextField(configurationHandler: {(editText: UITextField) -> Void in
+            editText.text = taskTitle
+        })
+        self.present(alert, animated: true, completion: nil)
     }
 }

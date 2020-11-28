@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol DisplayAlert {
+    func displayAlert(taskTitle: String, index: Int)
+}
+
 class TaskTableViewCell: UITableViewCell {
     
     @IBOutlet weak var taskTitleLabel: UILabel!
@@ -17,6 +21,8 @@ class TaskTableViewCell: UITableViewCell {
     var task: Task?
     
     var indexPath: Int = 0
+    
+    var delegate: DisplayAlert?
     
     @IBOutlet weak var favoriteButton: UIButton!
     
@@ -38,6 +44,10 @@ class TaskTableViewCell: UITableViewCell {
         } else {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
         }
+    }
+    
+    @IBAction func editButton(_ sender: Any) {
+        self.delegate?.displayAlert(taskTitle: self.taskTitleLabel.text!, index: indexPath)
     }
     
     func setUp(task: Task, index: Int) {
