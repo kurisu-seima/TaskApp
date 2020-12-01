@@ -198,17 +198,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タスクを追加してください" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hzj-t5-2rr">
-                                <rect key="frame" x="50" y="194" width="314" height="34"/>
+                                <rect key="frame" x="50" y="74" width="314" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="期限を入力してください" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m1L-Cy-vsE">
-                                <rect key="frame" x="50" y="268" width="314" height="34"/>
+                                <rect key="frame" x="50" y="148" width="314" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8nd-a4-N1k">
+                                <rect key="frame" x="50" y="222" width="314" height="420"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="420" id="jOz-Yd-sJS"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LHK-sK-acS">
-                                <rect key="frame" x="50" y="362" width="314" height="36"/>
+                                <rect key="frame" x="50" y="692" width="314" height="36"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="タスクを追加して一覧へ戻る">
@@ -219,23 +229,28 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="LHK-sK-acS" firstAttribute="trailing" secondItem="m1L-Cy-vsE" secondAttribute="trailing" id="KkA-F3-5LN"/>
-                            <constraint firstItem="LHK-sK-acS" firstAttribute="leading" secondItem="m1L-Cy-vsE" secondAttribute="leading" id="XVD-UR-UC0"/>
-                            <constraint firstItem="m1L-Cy-vsE" firstAttribute="leading" secondItem="Hzj-t5-2rr" secondAttribute="leading" id="dhw-as-0Ps"/>
-                            <constraint firstItem="LHK-sK-acS" firstAttribute="top" secondItem="m1L-Cy-vsE" secondAttribute="bottom" constant="60" id="e4a-WE-MJU"/>
-                            <constraint firstItem="m1L-Cy-vsE" firstAttribute="trailing" secondItem="Hzj-t5-2rr" secondAttribute="trailing" id="gcg-kP-7wi"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Hzj-t5-2rr" secondAttribute="trailing" constant="50" id="jeT-mf-t80"/>
-                            <constraint firstItem="m1L-Cy-vsE" firstAttribute="top" secondItem="Hzj-t5-2rr" secondAttribute="bottom" constant="40" id="oT2-Et-6oN"/>
-                            <constraint firstItem="Hzj-t5-2rr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="zP8-TE-HP3"/>
-                            <constraint firstItem="Hzj-t5-2rr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="zd2-7r-dUf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Hzj-t5-2rr" secondAttribute="trailing" constant="50" id="36S-ii-g4g"/>
+                            <constraint firstItem="8nd-a4-N1k" firstAttribute="top" secondItem="m1L-Cy-vsE" secondAttribute="bottom" constant="40" id="CzD-4l-9vU"/>
+                            <constraint firstItem="Hzj-t5-2rr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="Q6Y-aj-rTc"/>
+                            <constraint firstItem="Hzj-t5-2rr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="dY5-x9-Uqh"/>
+                            <constraint firstItem="8nd-a4-N1k" firstAttribute="top" secondItem="m1L-Cy-vsE" secondAttribute="bottom" constant="40" id="hPw-9D-5cB"/>
+                            <constraint firstItem="LHK-sK-acS" firstAttribute="leading" secondItem="8nd-a4-N1k" secondAttribute="leading" id="iwT-xP-bNq"/>
+                            <constraint firstItem="LHK-sK-acS" firstAttribute="trailing" secondItem="8nd-a4-N1k" secondAttribute="trailing" id="jIU-nT-T0U"/>
+                            <constraint firstItem="8nd-a4-N1k" firstAttribute="trailing" secondItem="m1L-Cy-vsE" secondAttribute="trailing" id="mkQ-io-f1Z"/>
+                            <constraint firstItem="LHK-sK-acS" firstAttribute="top" secondItem="8nd-a4-N1k" secondAttribute="bottom" constant="50" id="pBw-YA-oJx"/>
+                            <constraint firstItem="m1L-Cy-vsE" firstAttribute="trailing" secondItem="Hzj-t5-2rr" secondAttribute="trailing" id="qzj-9k-rjS"/>
+                            <constraint firstItem="m1L-Cy-vsE" firstAttribute="leading" secondItem="Hzj-t5-2rr" secondAttribute="leading" id="s2e-cL-Gms"/>
+                            <constraint firstItem="m1L-Cy-vsE" firstAttribute="top" secondItem="Hzj-t5-2rr" secondAttribute="bottom" constant="40" id="vIk-fE-b03"/>
+                            <constraint firstItem="8nd-a4-N1k" firstAttribute="leading" secondItem="m1L-Cy-vsE" secondAttribute="leading" id="wxA-9z-M70"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="dateTextField" destination="m1L-Cy-vsE" id="fYK-cc-tBh"/>
                         <outlet property="taskTextField" destination="Hzj-t5-2rr" id="y4Y-WH-o91"/>
+                        <outlet property="taskTextView" destination="8nd-a4-N1k" id="O9k-St-IPc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
