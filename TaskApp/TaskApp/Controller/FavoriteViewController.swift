@@ -13,8 +13,7 @@ class FavoriteViewController: UIViewController {
     @IBOutlet weak var favoriteTableView: UITableView!
     
     var favoriteTasks: [Task] {
-        let tasks = getData()
-       return getTrueTask(tasks: tasks)
+        TaskRepository.favoriteTasks
     }
     
     override func viewDidLoad() {

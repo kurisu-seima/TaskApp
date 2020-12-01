@@ -34,11 +34,8 @@ class TaskTableViewCell: UITableViewCell {
         guard let task = task else {
             return
         }
-        
-        task.isFavorite = !(task.isFavorite)
-        var tasks = getData()
-        tasks[indexPath] = task
-        saveData(tasks: tasks)
+
+        TaskRepository.favorite(task: task, sourceIndex: indexPath)
         if task.isFavorite {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {

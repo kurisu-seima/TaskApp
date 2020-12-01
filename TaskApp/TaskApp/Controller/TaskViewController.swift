@@ -13,7 +13,7 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var taskTableView: UITableView!
     
     var tasks: [Task] {
-        getData()
+        TaskRepository.tasks
     }
     
     override func viewDidLoad() {
@@ -58,9 +58,7 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        var tasks = getData()
-        tasks.remove(at: indexPath.row)
-        saveData(tasks: tasks)
+        TaskRepository.delete(index: indexPath.row)
         taskTableView.deleteRows(at: [indexPath], with: .automatic)
         taskTableView.reloadData()
     }
@@ -70,20 +68,15 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        var tasks = getData()
-        let task = tasks[sourceIndexPath.row]
-        tasks.remove(at: sourceIndexPath.row)
-        tasks.insert(task, at: destinationIndexPath.row)
-        saveData(tasks: tasks)
+        TaskRepository.sort(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         taskTableView.deselectRow(at: indexPath, animated: true)
         
         let nextVC = self.storyboard?.instantiateViewController(identifier: "AddTask") as! AddTaskViewController
-        let tasks = getData()
-        nextVC.task = tasks[indexPath.row].title
-        nextVC.date = tasks[indexPath.row].date
+        let tasks = TaskRepository.tasks
+        nextVC.task = tasks[indexPath.row]
         nextVC.indexPath = indexPath.row
 
         self.navigationController?.pushViewController(nextVC, animated: true)
@@ -93,12 +86,33 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
 extension TaskViewController: DisplayAlert {
     func displayAlert(taskTitle: String, index: Int) {
         let alert = UIAlertController(title: "ToDo名を編集", message: nil, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let okButton = UIAlertAction(title: "OK", style: .default) {(action) in
+            guard let textFields = alert.textFields else {
+                return
+            }
+            for textField in textFields {
+                switch textField.tag {
+                case 1:
+                    guard let newText = textField.text, !newText.isEmpty else {
+                        return
+                    }
+                    
+                    let tasks = TaskRepository.tasks
+                    tasks[index].title = newText
+                    TaskRepository.saveData(tasks: tasks)
+                    self.taskTableView.reloadData()
+                default:
+                    break
+                }
+            }
+        }
+        
         let cancelButton = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
         
         alert.addAction(okButton)
         alert.addAction(cancelButton)
         alert.addTextField(configurationHandler: {(editText: UITextField) -> Void in
+            editText.tag = 1
             editText.text = taskTitle
         })
         self.present(alert, animated: true, completion: nil)
