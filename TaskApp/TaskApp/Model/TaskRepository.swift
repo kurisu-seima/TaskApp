@@ -24,13 +24,7 @@ class TaskRepository {
     }
     
     static var favoriteTasks: [Task] {
-        var trueTasks: [Task] = []
-        for task in tasks {
-            if task.isFavorite {
-                trueTasks.append(task)
-            }
-        }
-        return trueTasks
+        tasks.filter{ $0.isFavorite}
     }
     
     static func favorite(task: Task, sourceIndex: Int) {

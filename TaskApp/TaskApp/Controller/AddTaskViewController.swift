@@ -18,12 +18,49 @@ class AddTaskViewController: UIViewController {
     
     let datepicker = UIDatePicker()
     
-    var task: Task?
-    var indexPath: Int?
+    var task: Task!
+    var indexPath: Int!
+    var addTaskType: AddTaskType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        datePickerSetUp()
+        
+        taskTextField.text = task?.title
+        dateTextField.text = task?.date
+        taskTextView.text = task?.contents
+        
+        taskTextView.delegate = self
+    }
+    
+    //タスクを追加して前の画面へ戻る
+    @IBAction func addButtonDidTapped(_ sender: Any) {
+        guard let title = taskTextField.text, let date = dateTextField.text, !title.isEmpty else {
+            return
+        }
+        
+        switch addTaskType {
+        case .new:
+            let task = Task(title: title, date: date, isFavorite: false, contents: taskTextView.text)
+            var tasks = TaskRepository.tasks
+            tasks.append(task)
+            TaskRepository.saveData(tasks: tasks)
+            self.navigationController?.popViewController(animated: true)
+        case .edit:
+            let tasks = TaskRepository.tasks
+            let task = tasks[indexPath]
+            task.title = title
+            task.date = date
+            task.contents = taskTextView.text
+            TaskRepository.saveData(tasks: tasks)
+            self.navigationController?.popViewController(animated: true)
+        case .none:
+            break
+        }
+    }
+    
+    func datePickerSetUp() {
         //ピッカービューの設定
         datepicker.datePickerMode = .date
         datepicker.locale = .current
@@ -38,12 +75,6 @@ class AddTaskViewController: UIViewController {
         //テキストフィールドの設定
         dateTextField.inputView = datepicker
         dateTextField.inputAccessoryView = toolbar
-        
-        taskTextField.text = task?.title
-        dateTextField.text = task?.date
-        taskTextView.text = task?.contents
-        
-        taskTextView.delegate = self
     }
     
     //ツールバーの完了ボタンを押した時の処理
@@ -53,33 +84,6 @@ class AddTaskViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy年MM月dd日"
         dateTextField.text = "\(formatter.string(from: datepicker.date))"
-    }
-    
-    //タスクを追加して前の画面へ戻る
-    @IBAction func addButtonDidTapped(_ sender: Any) {
-        if let task = task, let index = indexPath, !task.title.isEmpty, !task.date.isEmpty {
-            guard  let title = taskTextField.text, let date = dateTextField.text, let contents = taskTextView.text, !title.isEmpty, !date.isEmpty else {
-                return
-            }
-            
-            var tasks = TaskRepository.tasks
-            let task = tasks[index]
-            task.title = title
-            task.date = date
-            task.contents = contents
-            tasks[index] = task
-            TaskRepository.saveData(tasks: tasks)
-        } else {
-            guard  let title = taskTextField.text, let date = dateTextField.text, let contents = taskTextView.text, !title.isEmpty, !date.isEmpty else {
-                return
-            }
-            
-            let task = Task.init(title: title, date: date, isFavorite: false, contents: contents)
-            var tasks = TaskRepository.tasks
-            tasks.append(task)
-            TaskRepository.saveData(tasks: tasks)
-        }
-        self.navigationController?.popViewController(animated: true)
     }
 }
 

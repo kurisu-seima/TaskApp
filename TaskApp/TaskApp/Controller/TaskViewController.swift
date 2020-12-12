@@ -36,6 +36,7 @@ class TaskViewController: UIViewController {
     
     @IBAction func plusButtonDidTapped(_ sender: Any) {
         let nextVC = self.storyboard?.instantiateViewController(identifier: "AddTask") as! AddTaskViewController
+        nextVC.addTaskType = .new
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
@@ -78,6 +79,7 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
         let tasks = TaskRepository.tasks
         nextVC.task = tasks[indexPath.row]
         nextVC.indexPath = indexPath.row
+        nextVC.addTaskType = .edit
 
         self.navigationController?.pushViewController(nextVC, animated: true)
     }

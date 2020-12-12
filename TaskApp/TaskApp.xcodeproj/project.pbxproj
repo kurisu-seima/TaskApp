@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EC0248C52573C1D500C87FC9 /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0248C42573C1D500C87FC9 /* TaskRepository.swift */; };
+		EC0248C7257B2F9000C87FC9 /* AddTaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0248C6257B2F9000C87FC9 /* AddTaskType.swift */; };
 		EC1C77172560B16B00F8E7A1 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1C77162560B16B00F8E7A1 /* Task.swift */; };
 		EC32E3D92551A49000A83763 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC32E3D82551A49000A83763 /* FavoriteTableViewCell.swift */; };
 		EC9C55372544912900AEE610 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C55362544912900AEE610 /* TaskTableViewCell.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		EC0248C42573C1D500C87FC9 /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
+		EC0248C6257B2F9000C87FC9 /* AddTaskType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskType.swift; sourceTree = "<group>"; };
 		EC1C77162560B16B00F8E7A1 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		EC32E3D82551A49000A83763 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		EC9C55362544912900AEE610 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			children = (
 				EC1C77162560B16B00F8E7A1 /* Task.swift */,
 				EC0248C42573C1D500C87FC9 /* TaskRepository.swift */,
+				EC0248C6257B2F9000C87FC9 /* AddTaskType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC0248C7257B2F9000C87FC9 /* AddTaskType.swift in Sources */,
 				EC1C77172560B16B00F8E7A1 /* Task.swift in Sources */,
 				ECCC75B6254162CD00DE0148 /* AppDelegate.swift in Sources */,
 				ECCC75F025431BC200DE0148 /* TaskViewController.swift in Sources */,
