@@ -43,17 +43,14 @@ class AddTaskViewController: UIViewController {
         switch addTaskType {
         case .new:
             let task = Task(title: title, date: date, isFavorite: false, contents: taskTextView.text)
-            var tasks = TaskRepository.tasks
-            tasks.append(task)
-            TaskRepository.saveData(tasks: tasks)
+            TaskRepository.shared.add(task: task)
             self.navigationController?.popViewController(animated: true)
         case .edit:
-            let tasks = TaskRepository.tasks
+            let tasks = TaskRepository.shared.tasks
             let task = tasks[indexPath]
             task.title = title
             task.date = date
             task.contents = taskTextView.text
-            TaskRepository.saveData(tasks: tasks)
             self.navigationController?.popViewController(animated: true)
         case .none:
             break

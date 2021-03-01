@@ -10,41 +10,56 @@ import Foundation
 
 class TaskRepository {
     
-    static var tasks: [Task] {
-        guard let datas = UserDefaults.standard.data(forKey: "tasks") else {
+    static let shared = TaskRepository()
+    
+    private init() {
+        tasks = {
+            if let tasks: [Any] = UserDefaults.standard.array(forKey: "tasks") {
+                return tasks.compactMap { element in
+                    if let data = element as? Data, let task = try? JSONDecoder().decode(Task.self, from: data) {
+                        let task = task
+                        return task
+                    }
+                    return nil
+                }
+            }
             return []
+        }()
+    }
+    
+    private (set) var tasks: [Task] {
+        didSet {
+            let dataEncoder = tasks.compactMap{ element in
+                return try? JSONEncoder().encode(element)
+            }
+            UserDefaults.standard.set(dataEncoder, forKey: "tasks")
+            UserDefaults.standard.synchronize()
         }
-        let taskDatas = (try? JSONDecoder().decode([Task].self, from: datas)) ?? []
-        return taskDatas
     }
     
-    static func saveData(tasks: [Task]) {
-        let data = try? JSONEncoder().encode(tasks)
-        UserDefaults.standard.set(data, forKey: "tasks")
+    var favoriteTasks: [Task] {
+        tasks.filter{ $0.isFavorite }
     }
     
-    static var favoriteTasks: [Task] {
-        tasks.filter{ $0.isFavorite}
+    func add(task: Task) {
+        tasks.append(task)
     }
     
-    static func favorite(task: Task, sourceIndex: Int) {
+    func favorite(task: Task, sourceIndex: Int) {
         task.isFavorite = !task.isFavorite
         var tasks = self.tasks
         tasks[sourceIndex] = task
-        self.saveData(tasks: tasks)
     }
     
-    static func delete(index: Int) {
+    func delete(index: Int) {
         var tasks = self.tasks
         tasks.remove(at: index)
-        saveData(tasks: tasks)
     }
     
-    static func sort(sourceIndex: Int, destinationIndex: Int) {
+    func sort(sourceIndex: Int, destinationIndex: Int) {
         var tasks = self.tasks
         let task = tasks[sourceIndex]
         tasks.remove(at: sourceIndex)
         tasks.insert(task, at: destinationIndex)
-        saveData(tasks: tasks)
     }
 }

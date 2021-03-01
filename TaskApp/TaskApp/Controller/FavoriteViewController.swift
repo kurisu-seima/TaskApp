@@ -13,7 +13,9 @@ class FavoriteViewController: UIViewController {
     @IBOutlet weak var favoriteTableView: UITableView!
     
     var favoriteTasks: [Task] {
-        TaskRepository.favoriteTasks
+        get {
+            TaskRepository.shared.favoriteTasks
+        }
     }
     
     override func viewDidLoad() {

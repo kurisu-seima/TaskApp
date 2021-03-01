@@ -13,7 +13,7 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var taskTableView: UITableView!
     
     var tasks: [Task] {
-        TaskRepository.tasks
+        TaskRepository.shared.tasks
     }
     
     override func viewDidLoad() {
@@ -59,7 +59,7 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        TaskRepository.delete(index: indexPath.row)
+        TaskRepository.shared.delete(index: indexPath.row)
         taskTableView.deleteRows(at: [indexPath], with: .automatic)
         taskTableView.reloadData()
     }
@@ -69,14 +69,14 @@ extension TaskViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        TaskRepository.sort(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
+        TaskRepository.shared.sort(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         taskTableView.deselectRow(at: indexPath, animated: true)
         
         let nextVC = self.storyboard?.instantiateViewController(identifier: "AddTask") as! AddTaskViewController
-        let tasks = TaskRepository.tasks
+        let tasks = TaskRepository.shared.tasks
         nextVC.task = tasks[indexPath.row]
         nextVC.indexPath = indexPath.row
         nextVC.addTaskType = .edit
@@ -99,9 +99,8 @@ extension TaskViewController: DisplayAlert {
                         return
                     }
                     
-                    let tasks = TaskRepository.tasks
+                let tasks = TaskRepository.shared.tasks
                     tasks[index].title = newText
-                    TaskRepository.saveData(tasks: tasks)
                     self.taskTableView.reloadData()
                 default:
                     break

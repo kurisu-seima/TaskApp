@@ -35,7 +35,7 @@ class TaskTableViewCell: UITableViewCell {
             return
         }
 
-        TaskRepository.favorite(task: task, sourceIndex: indexPath)
+        TaskRepository.shared.favorite(task: task, sourceIndex: indexPath)
         if task.isFavorite {
             favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {
